@@ -47,6 +47,18 @@ library LibDiamond {
         mapping(bytes4 => bool) supportedInterfaces;
         // owner of the contract
         address contractOwner;
+
+        address tokenAddress;
+        bytes32 merkleRoot;
+        mapping(address => bool) paymentLedger;
+        mapping(address => bool) approvedUsers;
+        mapping(address => uint256) users;
+    }
+
+    constructor(address _tokenAddress, bytes32 _merkleRoot) {
+        tokenAddress = _tokenAddress;
+        merkleRoot = _merkleRoot;
+        owner = msg.sender;
     }
 
     function diamondStorage()
